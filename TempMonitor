@@ -14,8 +14,8 @@ def delay():
 
 def GetData():
     global CPU, GPU, GPU_FAN
-    os.system("sensors > sensors.out")
-    HardData = open("sensors.out", "r")
+    os.system("sensors > /tmp/sensors.out")
+    HardData = open("/tmp/sensors.out", "r")
     lineData = ""
     for line in HardData.readlines():
         lineData = lineData + line
@@ -34,12 +34,12 @@ def renewFile():
     log.write(data)
     log.close()
 
-    datafile = open("Temperature.data", "a")
+    datafile = open("/tmp/Temperature.data", "a")
     datafile.write(data)
     datafile.close()
 
 def ClearFile():
-    datafile = open("Temperature.data", "w")
+    datafile = open("/tmp/Temperature.data", "w")
     datafile.write("0, 0, 0\n")
     datafile.write("100, 100, 2970\n")
     datafile.close()
