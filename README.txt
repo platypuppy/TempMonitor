@@ -1,5 +1,5 @@
 Pre-requisite Software:
-- python3.8 (https://www.python.org/)
+- python3 (https://www.python.org/)
 - lm-sensors (https://github.com/lm-sensors/lm-sensors)
 - kst2 (https://kst-plot.kde.org/)
 (lm-sensors needs some setup)
@@ -14,7 +14,7 @@ Instalation Instructions:
 
 ---
 - now you can run TempMonitor wherever the log file is! (it will run else where but permanent log wont work well)
-- to see the data being collected run "kst2 Temperature.data" or "kst2 Temperature.log"
+- to see the data being collected run "kst2 /tmp/Temperature.data" or "kst2 Temperature.log"
 - ^C does not work for some reason, so the best way to Terminate "TempMonitor" is to find the PID of "TempMonitor" and "kill -9 PID"
      (htop has a search function which helps)
 
