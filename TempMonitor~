@@ -1,0 +1,22 @@
+#!/usr/bin/python3.8
+
+import os
+
+CPU = 0.0
+GPU = 0.0
+GPU_FAN = 2970
+
+
+#def delay():
+    
+
+def GetData():
+    os.system("sensors > sensors.out")
+    
+
+def renewFile():
+    GetData()
+
+while True:
+#    delay()
+    renewFile()

@@ -1,0 +1,51 @@
+#!/usr/bin/python3.8
+
+import os
+import re 
+import time
+
+CPU = 0
+GPU = 0
+GPU_FAN = 2970
+
+def delay():
+    time.sleep(.5)
+    
+
+def GetData():
+    global CPU, GPU, GPU_FAN
+    os.system("sensors > sensors.out")
+    HardData = open("sensors.out", "r")
+    lineData = ""
+    for line in HardData.readlines():
+        lineData = lineData + line
+    
+    m = re.match(r'^[^~]*(\d+) RPM  \([^~]*edge: \s+\+(\d+).[^~]*Tctl: \s+\+(\d+).[^~]*$', lineData)
+    if m:
+        GPU_FAN = int(m.group(1))
+        GPU = int(m.group(2))
+        CPU = int(m.group(3))
+
+def renewFile():
+    GetData()
+    data = " " + str(CPU) + ", " + str(GPU) + ", " + str(GPU_FAN) + "\n"
+#    print(data)
+    log = open("Temperature.log",  "a")
+    log.write(data)
+    log.close()
+
+    datafile = open("Temperature.data", "a")
+    datafile.write(data)
+    datafile.close()
+
+def ClearFile():
+    datafile = open("Temperature.data", "w")
+    datafile.write("0, 0, 0\n")
+    datafile.write("100, 100, 2970\n")
+    datafile.close()
+    
+ClearFile()
+print("Reading Data....")
+while True:
+    renewFile()
+    delay()
