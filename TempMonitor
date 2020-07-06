@@ -20,7 +20,7 @@ def GetData():
     for line in HardData.readlines():
         lineData = lineData + line
     
-    m = re.match(r'^[^~]*(\d+) RPM  \([^~]*edge: \s+\+(\d+).[^~]*Tctl: \s+\+(\d+).[^~]*$', lineData)
+    m = re.match(r'^[^~]*fan1: \s+(\d+) RPM  \([^~]*edge: \s+\+(\d+).[^~]*Tctl: \s+\+(\d+).[^~]*$', lineData)
     if m:
         GPU_FAN = int(m.group(1))
         GPU = int(m.group(2))
