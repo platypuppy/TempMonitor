@@ -3,14 +3,31 @@
 import os
 import re 
 import time
+import sys
+import getopt
 
 CPU = 0
 GPU = 0
 GPU_FAN = 2970
+DO_LOG = False
 
+try:
+    opts, args = getopt.getopt(":l:", ["log"])
+except getopt.GetoptError as err:
+    print(err)
+    print("get opt error, only valid -l or --log for permanent log")
+    sys.exit(34)
+
+
+for opt, arg in opts:
+    if opt == "-l" or opt == "--log":
+        DO_LOG = True
+    else:
+        print("get opt error, only valid -l or --log for permanent log")
+    
+    
 def delay():
     time.sleep(.5)
-    
 
 def GetData():
     global CPU, GPU, GPU_FAN
@@ -30,9 +47,11 @@ def renewFile():
     GetData()
     data = " " + str(CPU) + ", " + str(GPU) + ", " + str(GPU_FAN) + "\n"
 #    print(data)
-    log = open("Temperature.log",  "a")
-    log.write(data)
-    log.close()
+
+    if (DO_LOG):
+        log = open("Temperature.log",  "a")
+        log.write(data)
+        log.close()
 
     datafile = open("/tmp/Temperature.data", "a")
     datafile.write(data)
