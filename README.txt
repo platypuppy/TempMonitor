@@ -15,8 +15,7 @@ Instalation Instructions:
 ---
 - now you can run TempMonitor wherever the log file is! (it will run else where but permanent log wont work well)
 - to see the data being collected run "kst2 /tmp/Temperature.data" or "kst2 Temperature.log"
-- ^C does not work for some reason, so the best way to Terminate "TempMonitor" is to find the PID of "TempMonitor" and "kill -9 PID"
-     (htop has a search function which helps)
+- ^C closes TempMonitor (you might have to do ^C a few times tho)
 
 
 Information:
@@ -24,3 +23,6 @@ Information:
 - Column 2 is GPU temperature
 - Column 3 is GPU fan speed
 
+Warnings:
+This will continuesly append to the .data files until the software is terminated. this will write to the file infinitely beware.
+log files will never be deleted, so they will not clear space when TempMonitor is started again.
